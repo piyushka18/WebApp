@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/angular-csp.css">
+    <link rel="stylesheet" type="text/css" href="styles/webapp.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+      body
+      {
+        padding-top: 50px;
+      }
+    </style>
+  </head>
+  <body ng-app="myapp">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#3c437d">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#"><i class="fa fa-user" aria-hidden="true" style="font-size:45px"></i></a>
+    </div>
+      <div class="form-group nav_search">
+        <input type="text" class="form-control" placeholder="Search">
+        
+      </div>
+      <a class="navbar-brand "> <img src="images/comcast.png" style="height:35px;"></a>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="container">
+  <div class="starter-template">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Create A Reservation</h1>
+      </div>
+      <div class="col-md-6" >
+        <div class="row wizard_nav" >
+          <div class="col-md-4">
+            &#10003; Time and Date            
+          </div>
+          <div class="col-md-4">
+            &#10003; Equipment 
+          </div>
+          <div class="col-md-4" style="font-weight:bold;">
+            &#9314; Confirmation
+          </div>
+        </div>
+      </div>   
+    </div>
+
+    <div class="row" ng-controller="RandomController as randomVm">
+        <div class="col-md-12">
+          <i class="fa fa-check-circle" aria-hidden="true" style="padding: 33px;font-size:200px;"></i>
+          <p>Your reservation is confirmed. Please remember to check-in<br>
+          an hour before youy reservation. Your reservation ID is:<br></p>
+          <p style="font-size:20px" >{{randomVm.text}}</p>
+        </div>
+    </div>
+    <div class="row">
+      <div row="col-md-12">
+        <div class="well well-sm">
+          <p class="text-left" style="font-size:20px">
+            Reservation Details
+          <hr style="font-size:20px">
+          </p>
+          <div class="row">
+            <div class="col-md-3">
+              <p> Date: April23 - April 30 <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p>Start Time: 11:00 AM <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p> End Time: 12:00 PM <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+            </div>
+            <div class="col-md-3">
+              <p> Building: Comcast Center <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p> Room: 18.202 North (18th Floor) <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p> Attendees: 1 - 10 <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+           
+            </div>
+            <div class="col-md-3">
+              <p> Equipment Neeeded: <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p> None</p>
+            </div>
+            <div class="col-md-3">
+              <p> Other Details <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+              <p> Set Required</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.container -->
+<script type="text/javascript" src="javascript/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="javascript/angular.js"></script>
+<script type="text/javascript" src="javascript/angular-animate.js"></script>
+<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/ui-bootstrap-tpls.js"></script>
+
+<script type="text/javascript">
+  angular
+    .module('myapp', ['ui.bootstrap']);
+
+    angular.module('myapp').controller('RandomController', RandomController);
+    RandomController.$inject = [];
+    function RandomController(){
+      var vm = this;
+      
+      vm.text = _randomText();
+
+      function _randomText(){
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+      }
+    }
+
+  angular
+    .module('myapp')
+    .controller('MyController',MyController);
+
+  MyController.$inject=['$scope'];
+  function MyController($scope){
+    //setting items on $scope is bad
+    $scope.page_title = "New Page";
+    $scope.page_body = "abcknknknkanvk";
+  }
+
+  angular
+    .module('myapp')
+    .controller('MyController', ['$scope', function($scope) {
+
+    $scope.page_title = "New Page";
+    $scope.page_body = "abcknknknkanvk";
+  }]);
+
+  angular
+    .module('myapp')
+    .controller('MyController2', ['$scope', function($scope) {
+    //setting items on vm is good
+    var vm = this;
+    vm.myName = 'Testing123';
+  }]);
+
+  angular
+    .module('myapp')
+    .controller('TimepickerDemoCtrl', function($scope, $log) {
+    $scope.mytime = new Date();
+
+    $scope.hstep = 1;
+    $scope.mstep = 15;
+
+    $scope.options = {
+      hstep: [1, 2, 3],
+      mstep: [1, 5, 10, 15, 25, 30]
+    };
+
+    $scope.ismeridian = true;
+    $scope.toggleMode = function() {
+      $scope.ismeridian = !$scope.ismeridian;
+    };
+
+    $scope.update = function() {
+      var d = new Date();
+      d.setHours(14);
+      d.setMinutes(0);
+      $scope.mytime = d;
+    };
+
+    $scope.changed = function() {
+      $log.log('Time changed to: ' + $scope.mytime);
+    };
+
+    $scope.clear = function() {
+      $scope.mytime = null;
+    };
+  });
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/angular-csp.css">
+		<style type="text/css">
+			body {
+  padding-top: 50px;
+}
+
+/*.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}*/
+		</style>
+	</head>
+	<body ng-app="myapp">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="starter-template">
+    <h1>Bootstrap starter template</h1>
+
+    <section ng-controller="MyController">
+      <h1>{{page_title}}</h1>
+    </section>
+    <section ng-controller="MyController2 as c2">
+      <h3>
+  {{c2.myName}}
+  </h3>
+    </section>
+
+    <div ng-controller="TimepickerDemoCtrl">
+
+      <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+
+      <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+
+      <div class="row">
+        <div class="col-xs-6">
+          Hours step is:
+          <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
+        </div>
+        <div class="col-xs-6">
+          Minutes step is:
+          <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
+        </div>
+      </div>
+
+      <hr>
+
+      <button type="button" class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
+      <button type="button" class="btn btn-default" ng-click="update()">Set to 14:00</button>
+      <button type="button" class="btn btn-danger" ng-click="clear()">Clear</button>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- /.container -->
+<script type="text/javascript" src="javascript/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="javascript/angular.js"></script>
+<script type="text/javascript" src="javascript/angular-animate.js"></script>
+<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript">
+  var myapp = angular.module('myapp', ['ui.bootstrap']);
+
+  myapp.controller('MyController', ['$scope', function($scope) {
+
+    $scope.page_title = "New Page";
+    $scope.page_body = "abcknknknkanvk";
+  }]);
+
+  myapp.controller('MyController2', ['$scope', function($scope) {
+    var ctrl = this;
+    ctrl.myName = 'Testing123';
+  }]);
+
+  myapp.controller('TimepickerDemoCtrl', function($scope, $log) {
+    $scope.mytime = new Date();
+
+    $scope.hstep = 1;
+    $scope.mstep = 15;
+
+    $scope.options = {
+      hstep: [1, 2, 3],
+      mstep: [1, 5, 10, 15, 25, 30]
+    };
+
+    $scope.ismeridian = true;
+    $scope.toggleMode = function() {
+      $scope.ismeridian = !$scope.ismeridian;
+    };
+
+    $scope.update = function() {
+      var d = new Date();
+      d.setHours(14);
+      d.setMinutes(0);
+      $scope.mytime = d;
+    };
+
+    $scope.changed = function() {
+      $log.log('Time changed to: ' + $scope.mytime);
+    };
+
+    $scope.clear = function() {
+      $scope.mytime = null;
+    };
+  });
+
+	</script>
+	</body>
+</html>

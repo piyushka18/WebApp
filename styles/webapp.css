@@ -1,0 +1,42 @@
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.wizard_nav {
+      padding-top: 30px;
+}
+.wizard_search{
+	width: 70%;
+    position: absolute;
+    top: 35%;
+    left: 13%;
+}
+.wizard_dropdown{
+	width: 100%;
+}
+.wizard_multisel{
+	padding-top: 10%;
+	padding-left: 26%;
+}
+.navbar-header{
+ position: absolute;
+ left: 90%
+}
+.nav_search{
+	width:20%;
+	position: absolute;
+	top: 27%;
+	left: 60%;
+}
+.checkmark{
+	padding: 33px
+	font-size:200px;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
+}
